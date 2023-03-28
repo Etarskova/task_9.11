@@ -1,4 +1,5 @@
 const mnth = Math.floor(Math.random()*3);
+
 const personGenerator = {
     surnameJson: `{  
         "count": 15,
@@ -24,16 +25,16 @@ const personGenerator = {
     firstNameMaleJson: `{
         "count": 10,
         "list": {     
-            "id_1": "Александр",
-            "id_2": "Максим",
+            "id_1": "Андрей",
+            "id_2": "Елисей",
             "id_3": "Иван",
-            "id_4": "Артем",
-            "id_5": "Дмитрий",
-            "id_6": "Никита",
+            "id_4": "Сергей",
+            "id_5": "Олег",
+            "id_6": "Петр",
             "id_7": "Михаил",
             "id_8": "Даниил",
             "id_9": "Егор",
-            "id_10": "Андрей"
+            "id_10": "Сергей"
         }
     }`,
     firstNameFemaleJson: `{
@@ -51,7 +52,8 @@ const personGenerator = {
             "id_10": "Наталья"
         }
     }`,
-    middleNameJson: `{
+
+   /*middleNameJson: `{
         "count": 10,
         "list": {
             "id_1": "Андреев",
@@ -65,7 +67,7 @@ const personGenerator = {
             "id_9": "Кириллов",
             "id_10": "Елизаров"
         }
-    }`,
+    }`,*/
 
     professionMaleJson: `{
         "count": 10,
@@ -132,12 +134,28 @@ const personGenerator = {
         }
     },
 
-    randomMiddleName: function() {   // генерация отчества
+    /*randomMiddleName: function() {   // генерация отчества
         if (this.person.gender == 'Мужчина') {
-            return this.randomValue(this.middleNameJson) + 'ич';
+            return this.randomValue(this.firstNameMaleJson) + 'ович';
         }
         else {
-            return this.randomValue(this.middleNameJson) + 'нa';
+            return this.randomValue(this.firstNameMaleJson) + 'овнa';
+        }
+    },*/
+
+    randomMiddleName: function() {   // генерация отчества
+        let midNamMal = this.randomValue(this.firstNameMaleJson);
+        if (this.person.gender == 'Мужчина') {
+            if (midNamMal.includes("ей")) {
+                return midNamMal.replace ("ей", "еевич");
+            }
+            else return midNamMal + 'ович';
+        }
+        if (this.person.gender == 'Женщина') { 
+            if (midNamMal.includes('ей')) {
+                return midNamMal.replace("ей", "еевна");
+            }
+            else return midNamMal + 'овнa';
         }
     },
 
